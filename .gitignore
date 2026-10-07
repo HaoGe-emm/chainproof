@@ -1,0 +1,20 @@
+/node_modules/
+/.next/
+/out/
+/.pnpm-store/
+
+# Local configuration and logs
+.env
+.env.*
+*.log
+*.tsbuildinfo
+
+# System and editor temporary files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*.tmp
+*.temp
+*~
