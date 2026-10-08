@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 import type { Address } from "viem";
+import { botChainMainnet } from "@/lib/chainproof";
 import { connectMetaMask, friendlyChainError, getMetaMask, shortenAddress, type MetaMaskProvider } from "@/lib/wallet";
 
 type WalletContextValue = {
@@ -49,7 +50,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     try {
       const result = await connectMetaMask();
       setAddress(result.account);
-      setChainId(968);
+      setChainId(botChainMainnet.id);
       return result;
     } catch (cause) {
       setError(friendlyChainError(cause, "Could not connect to MetaMask."));
@@ -81,7 +82,7 @@ export function WalletStatus() {
         {connecting ? "Connecting…" : address ? shortenAddress(address) : "Connect Wallet"}
       </button>
       <div aria-live="polite" className="max-w-56 text-right text-[11px] leading-4 text-zinc-400">
-        {metaMaskAvailable === false ? "MetaMask is required." : error || (address && chainId !== null && chainId !== 968 ? "Wrong network · click wallet to switch" : "")}
+        {metaMaskAvailable === false ? "MetaMask is required." : error || (address && chainId !== null && chainId !== botChainMainnet.id ? "Wrong network · click wallet to switch" : "")}
       </div>
     </div>
   );

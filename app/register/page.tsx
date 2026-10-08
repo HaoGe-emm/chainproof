@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { createWalletClient, custom, type Address, type Hex } from "viem";
 import FilePicker from "@/components/file-picker";
 import { useWallet } from "@/components/wallet-provider";
-import { BOTSCAN_URL, CHAIN_PROOF_ADDRESS, bohrTestnet, chainProofAbi, publicClient, readProof, receiptRegistersProof, toFileHashBytes32 } from "@/lib/chainproof";
+import { BOTSCAN_URL, CHAIN_PROOF_ADDRESS, botChainMainnet, chainProofAbi, publicClient, readProof, receiptRegistersProof, toFileHashBytes32 } from "@/lib/chainproof";
 import { PROOF_TYPES, type FileFingerprint, type ProofType } from "@/lib/proof";
 import { friendlyChainError } from "@/lib/wallet";
 
@@ -68,7 +68,7 @@ export default function RegisterPage() {
 
       setPhase("confirming");
       const fileHash = toFileHashBytes32(fingerprint.hash);
-      const walletClient = createWalletClient({ account, chain: bohrTestnet, transport: custom(provider) });
+      const walletClient = createWalletClient({ account, chain: botChainMainnet, transport: custom(provider) });
       const transaction = await walletClient.writeContract({
         address: CHAIN_PROOF_ADDRESS,
         abi: chainProofAbi,

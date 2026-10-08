@@ -1,14 +1,14 @@
 import { createPublicClient, defineChain, getAddress, http, parseAbi, parseEventLogs, type Address, type Hex, type TransactionReceipt } from "viem";
 
-export const BOHR_RPC_URL = "https://rpc.bohr.life";
-export const BOTSCAN_URL = "https://scan.bohr.life";
+export const BOT_CHAIN_RPC_URL = "https://rpc.botchain.ai";
+export const BOTSCAN_URL = "https://scan.botchain.ai";
 export const CHAIN_PROOF_ADDRESS = getAddress("0xC64CEF65ccd720664cc3bfd7D970b6F866E53052");
 
-export const bohrTestnet = defineChain({
-  id: 968,
-  name: "Bohr Testnet",
+export const botChainMainnet = defineChain({
+  id: 677,
+  name: "BOT Chain Mainnet",
   nativeCurrency: { name: "BOT", symbol: "BOT", decimals: 18 },
-  rpcUrls: { default: { http: [BOHR_RPC_URL] } },
+  rpcUrls: { default: { http: [BOT_CHAIN_RPC_URL] } },
   blockExplorers: { default: { name: "BOTScan", url: BOTSCAN_URL } },
 });
 
@@ -19,8 +19,8 @@ export const chainProofAbi = parseAbi([
 ]);
 
 export const publicClient = createPublicClient({
-  chain: bohrTestnet,
-  transport: http(BOHR_RPC_URL),
+  chain: botChainMainnet,
+  transport: http(BOT_CHAIN_RPC_URL),
 });
 
 export function toFileHashBytes32(hash: string): Hex {
@@ -39,7 +39,7 @@ export function receiptRegistersProof(receipt: Pick<TransactionReceipt, "status"
 
 export async function readProof(hash: string) {
   const chainId = await publicClient.getChainId();
-  if (chainId !== bohrTestnet.id) throw new Error("Bohr RPC returned the wrong chain.");
+  if (chainId !== botChainMainnet.id) throw new Error("BOT Chain RPC returned the wrong chain.");
   return publicClient.readContract({
     address: CHAIN_PROOF_ADDRESS,
     abi: chainProofAbi,

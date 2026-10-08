@@ -49,7 +49,20 @@ The [ChainProof contract](contracts/ChainProof.sol) exposes two functions:
 
 The contract stores the file hash as the mapping key, together with the creator wallet and registration timestamp. The Title and Proof Type fields in the UI are presentation fields; they are not stored on-chain.
 
+## Mainnet Deployment
+
+The frontend uses BOT Chain Mainnet for proof creation and verification.
+
+- **Network:** BOT Chain Mainnet
+- **Chain ID:** `677`
+- **RPC:** `https://rpc.botchain.ai`
+- **Mainnet Contract Address:** `0xC64CEF65ccd720664cc3bfd7D970b6F866E53052`
+- **Mainnet Explorer:** [BOTScan](https://scan.botchain.ai)
+- **Native Token:** BOT
+
 ## Testnet Deployment
+
+Historical Bohr Testnet deployment (not used by the current frontend):
 
 - **Network:** Bohr Testnet
 - **Chain ID:** `968`
@@ -57,7 +70,7 @@ The contract stores the file hash as the mapping key, together with the creator 
 - **Contract Address:** `0xC64CEF65ccd720664cc3bfd7D970b6F866E53052`
 - **Explorer:** [BOTScan](https://scan.bohr.life)
 
-MetaMask may show a different network or currency label for Chain ID `968`. The app checks the chain ID and compares the wallet's network with the configured Bohr RPC.
+MetaMask may show a different network or currency label for Chain ID `968`. This historical deployment is not selected by the current frontend.
 
 ## Running Locally
 
@@ -68,7 +81,7 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Run `npm run build` to check the production build. Creating a proof requires MetaMask and testnet BOT for gas; verification does not require a wallet.
+Open [http://localhost:3000](http://localhost:3000). Run `npm run build` to check the production build. Creating a proof requires MetaMask and mainnet BOT for gas; verification does not require a wallet.
 
 ## Demo Flow
 

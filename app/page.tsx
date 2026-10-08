@@ -10,7 +10,7 @@ export default function Home() {
       <div className="max-w-3xl">
         <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300">
           <span className="size-1.5 rounded-full bg-emerald-400" />
-          Private by design · Bohr Testnet
+          Private by design · BOT Chain Mainnet
         </div>
         <h1 className="text-6xl font-semibold tracking-[-0.065em] text-white sm:text-7xl lg:text-8xl">ChainProof<span className="text-zinc-500">.</span></h1>
         <p className="mt-7 max-w-xl text-xl leading-relaxed text-zinc-300 sm:text-2xl">Make digital work verifiable.</p>

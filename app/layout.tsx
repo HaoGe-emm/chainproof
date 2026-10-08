@@ -19,11 +19,11 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               <span className="grid size-8 place-items-center rounded-lg border border-white/20 bg-white/5 text-base">◇</span>
               CHAINPROOF
             </Link>
-            <div className="flex items-center gap-6"><span className="hidden text-xs font-medium tracking-[0.18em] text-zinc-500 lg:block">BOT CHAIN HACKATHON · TESTNET</span><WalletStatus /></div>
+            <div className="flex items-center gap-6"><span className="hidden text-xs font-medium tracking-[0.18em] text-zinc-500 lg:block">BOT CHAIN MAINNET</span><WalletStatus /></div>
           </header>
           <main className="flex flex-1 flex-col">{children}</main>
           <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 py-6 text-xs text-zinc-500">
-            <span>ChainProof · Bohr Testnet</span>
+            <span>ChainProof · BOT Chain Mainnet</span>
             <span>Files stay on your device.</span>
           </footer>
         </div>
