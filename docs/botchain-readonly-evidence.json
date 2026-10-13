@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-13",
+  "scope": "Read-only public RPC; isolated in-process31339 tests; no public deployment/write",
+  "mainnet": {
+    "checkedAt": "2026-10-13T09:12:42.221Z",
+    "identity": {
+      "ok": true,
+      "result": "0x2a5"
+    },
+    "client": {
+      "ok": true,
+      "result": "Geth/v1.5.13-7ebdbab3-20260822/linux-amd64/go1.26.5"
+    },
+    "head": {
+      "number": "26531131",
+      "hash": "0x5ddc9d541f8d32e0d914f8d00773864c6073c3ffafa8be94174844153e74ad17",
+      "timestamp": "1791882767",
+      "baseFeePerGas": "0x0",
+      "gasLimit": "0x2160ec0",
+      "difficulty": "0x2",
+      "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+      "blobGasUsed": "0x0",
+      "excessBlobGas": "0x0",
+      "transactionTypes": [
+        "0x0"
+      ]
+    },
+    "genesisHash": "0x161a4ff8b4c95e95b314899c4ea8f9782c4ae8851362ffe0d47c0b8a05f7b784",
+    "oldRuntime": {
+      "bytes": 1062,
+      "keccak256": "0xf1737614e88192546a33fff680f0892d435fa13aa755d2f429f38d54aced73bc",
+      "metadataTail": "56fea26469706673582212200e9c233ead2efb7b1b0ad7a6d264e8bc0fca4167a7d1077023fbb6f25f52d81664736f6c63430008220033"
+    },
+    "proof": [
+      "0x89F415bb42e356E8b892C10B05522e0a8Ef151F3",
+      "1791426243",
+      true
+    ],
+    "registration": {
+      "hash": "0x60e363ce4a5c67b86640f9b8d13122a77b2387a12d736518d34070bac454aafc",
+      "status": "0x1",
+      "block": "25922443",
+      "blockHash": "0x343bc2176e27006ebf465f047a7c4ad6e19316f3eddbfb59f5e80d37f07e941b",
+      "events": [
+        {
+          "eventName": "ProofRegistered",
+          "args": {
+            "fileHash": "0x8ed3e3e1dc015bd4fe18a80b93adccbd93ea9f7ee7a577600ae6d2e07642f625",
+            "owner": "0x89F415bb42e356E8b892C10B05522e0a8Ef151F3",
+            "timestamp": "1791426243"
+          }
+        }
+      ]
+    },
+    "deployment": {
+      "hash": "0x72bd59f3b4c46176845456310b4cc8a64e8a09bfbec2c6442f6d09e9de4be9c1",
+      "status": "0x1",
+      "block": "25857169",
+      "address": "0xc64cef65ccd720664cc3bfd7d970b6f866e53052"
+    },
+    "opcodeCalls": {
+      "BASEFEE": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "PUSH0": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "MCOPY": {
+        "ok": true,
+        "result": "0x"
+      },
+      "TRANSIENT": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+      },
+      "BLOBBASEFEE": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+      }
+    },
+    "gasPrice": {
+      "ok": true,
+      "result": "0x4a817c800"
+    },
+    "priorityFee": {
+      "ok": true,
+      "result": "0x4a817c800"
+    },
+    "feeHistory": {
+      "ok": true,
+      "result": {
+        "oldestBlock": "0x194d537",
+        "reward": [
+          [
+            "0x4a817c800",
+            "0x4a817c800",
+            "0x51f4d5c00"
+          ],
+          [
+            "0x4a817c800",
+            "0x4a817c800",
+            "0x51f4d5c00"
+          ],
+          [
+            "0x4a817c800",
+            "0x4a817c800",
+            "0x51f4d5c00"
+          ],
+          [
+            "0x4a817c800",
+            "0x4a817c800",
+            "0x51f4d5c00"
+          ],
+          [
+            "0x4a817c800",
+            "0x4a817c800",
+            "0x4a817c800"
+          ]
+        ],
+        "baseFeePerGas": [
+          "0x0",
+          "0x0",
+          "0x0",
+          "0x0",
+          "0x0",
+          "0x0"
+        ],
+        "gasUsedRatio": [
+          0,
+          0.007383714285714286,
+          0.0044198,
+          0.0022647714285714284,
+          0.0263068
+        ],
+        "baseFeePerBlobGas": [
+          "0x1",
+          "0x1",
+          "0x1",
+          "0x1",
+          "0x1",
+          "0x1"
+        ],
+        "blobGasUsedRatio": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    "simulatedCreation": {
+      "paris-200": {
+        "ok": true,
+        "result": {
+          "returnedBytes": 2554,
+          "runtimeCodeHash": "0x4938dd9094a7a4bd7fe0a18fba4c0be68d3cbc3864f3c564bdc45918c5a96bbb"
+        }
+      },
+      "paris-200-estimate": {
+        "ok": true,
+        "result": "0x9e666"
+      },
+      "shanghai-200": {
+        "ok": true,
+        "result": {
+          "returnedBytes": 2517,
+          "runtimeCodeHash": "0xb29dc8744a328c91fa5466d9d5d2613e1c01b20b68aad3c4903c142a0aa2ca5a"
+        }
+      },
+      "shanghai-200-estimate": {
+        "ok": true,
+        "result": "0x9c856"
+      }
+    },
+    "logRanges": {
+      "1": {
+        "ok": true,
+        "count": 1
+      },
+      "100": {
+        "ok": true,
+        "count": 1
+      },
+      "10000": {
+        "ok": true,
+        "count": 1
+      },
+      "10001": {
+        "ok": true,
+        "count": 1
+      }
+    },
+    "ownerTopicQuery": {
+      "block": 25922443,
+      "count": 1,
+      "knownTxMatches": true
+    },
+    "sampledBlocks": [
+      {
+        "number": "0x194d53a",
+        "hash": "0xb0faee181780e8d6f6de25d5221645f8d8c5629a521b58bf4129aea6af2de67e",
+        "timestamp": "0x6acdf60f",
+        "baseFeePerGas": "0x0",
+        "transactionTypes": [
+          "0x0"
+        ]
+      },
+      {
+        "number": "0x194d539",
+        "hash": "0x659ea9888b6527214b84190cdbb0b71ddfd403187d0e1d5fdba162d29af7acee",
+        "timestamp": "0x6acdf60e",
+        "baseFeePerGas": "0x0",
+        "transactionTypes": [
+          "0x2",
+          "0x0"
+        ]
+      },
+      {
+        "number": "0x194d538",
+        "hash": "0x0befb19f2fe139a2748db9af0fa6fe0ee3921f28202634651cc00d3b580bcee9",
+        "timestamp": "0x6acdf60d",
+        "baseFeePerGas": "0x0",
+        "transactionTypes": [
+          "0x0",
+          "0x2"
+        ]
+      },
+      {
+        "number": "0x194d537",
+        "hash": "0x5766f2ca5ddcea2745d22e3ebf1bdbeb91e7da672b8c5085c703e6896c735baa",
+        "timestamp": "0x6acdf60c",
+        "baseFeePerGas": "0x0",
+        "transactionTypes": []
+      }
+    ]
+  },
+  "testnet": {
+    "checkedAt": "2026-10-13T09:11:00.678Z",
+    "identity": {
+      "ok": true,
+      "result": "0x3c8"
+    },
+    "client": {
+      "ok": true,
+      "result": "Geth/v1.5.13-f6e21988-20260822/linux-amd64/go1.27.1"
+    },
+    "head": {
+      "number": "26697576",
+      "hash": "0x0d4eb93411161ecd53ec27d8a4a2c23e234562c6e405725efdd45aa4f489e135",
+      "timestamp": "1791882665",
+      "baseFeePerGas": "0x0",
+      "gasLimit": "0x2160ec0",
+      "difficulty": "0x2",
+      "withdrawalsRoot": "0x56e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421",
+      "blobGasUsed": "0x0",
+      "excessBlobGas": "0x0",
+      "transactionTypes": []
+    },
+    "genesisHash": "0x395bd3d6583216495648e8322032761c1a377eddf04f59de0c693c7d6682aee6",
+    "opcodeCalls": {
+      "BASEFEE": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "PUSH0": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000000"
+      },
+      "MCOPY": {
+        "ok": true,
+        "result": "0x"
+      },
+      "TRANSIENT": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+      },
+      "BLOBBASEFEE": {
+        "ok": true,
+        "result": "0x0000000000000000000000000000000000000000000000000000000000000001"
+      }
+    },
+    "explorerCrosscheck": {
+      "height": 26697796,
+      "hash": "0x2019c03a468b46ecb66a5d296f2f825b721c0791f817df2dce6d7895fb8617c5",
+      "match": true
+    }
+  },
+  "localMeasurements": [
+    {
+      "variant": "paris-200",
+      "hardfork": "merge",
+      "analysis": {
+        "creationBytes": 3024,
+        "runtimeBytes": 2554,
+        "runtimeCodeBytes": 2500,
+        "embeddedRuntimeOffset": 470,
+        "constructorPush0": 0,
+        "runtimePush0": 0,
+        "runtimeOpcodeSet": [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x19",
+          "0x1b",
+          "0x1c",
+          "0x20",
+          "0x33",
+          "0x34",
+          "0x35",
+          "0x36",
+          "0x3d",
+          "0x42",
+          "0x50",
+          "0x51",
+          "0x52",
+          "0x54",
+          "0x55",
+          "0x56",
+          "0x57",
+          "0x5a",
+          "0x5b",
+          "0x60",
+          "0x61",
+          "0x62",
+          "0x63",
+          "0x67",
+          "0x7f",
+          "0x80",
+          "0x81",
+          "0x82",
+          "0x83",
+          "0x84",
+          "0x85",
+          "0x86",
+          "0x87",
+          "0x88",
+          "0x89",
+          "0x8a",
+          "0x8b",
+          "0x8c",
+          "0x8d",
+          "0x8f",
+          "0x90",
+          "0x91",
+          "0x92",
+          "0x93",
+          "0x94",
+          "0x95",
+          "0x96",
+          "0x97",
+          "0x98",
+          "0x99",
+          "0xa3",
+          "0xa4",
+          "0xf3",
+          "0xfa",
+          "0xfd"
+        ]
+      },
+      "deploymentGasUsed": "641745",
+      "gasUsed": {
+        "1": "151383",
+        "2": "108109",
+        "10": "108109",
+        "100": "108097"
+      },
+      "queryGasEstimates": {
+        "getProof": "26285",
+        "getWork": "26164",
+        "getVersion": "31035"
+      },
+      "read20CallsMs": 7.2542000000012195,
+      "indexedWorkScanMs": 2.0037000000011176,
+      "runtimeCodeHash": "0xb0610ccb5030111af799356f1c2a112e3132250cafbbf938874d105725d8abc6",
+      "original": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "registry": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    },
+    {
+      "variant": "shanghai-200",
+      "hardfork": "shanghai",
+      "analysis": {
+        "creationBytes": 2973,
+        "runtimeBytes": 2517,
+        "runtimeCodeBytes": 2463,
+        "embeddedRuntimeOffset": 456,
+        "constructorPush0": 14,
+        "runtimePush0": 37,
+        "runtimeOpcodeSet": [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x19",
+          "0x1b",
+          "0x1c",
+          "0x20",
+          "0x33",
+          "0x34",
+          "0x35",
+          "0x36",
+          "0x3d",
+          "0x42",
+          "0x50",
+          "0x51",
+          "0x52",
+          "0x54",
+          "0x55",
+          "0x56",
+          "0x57",
+          "0x5a",
+          "0x5b",
+          "0x5f",
+          "0x60",
+          "0x61",
+          "0x62",
+          "0x63",
+          "0x67",
+          "0x7f",
+          "0x80",
+          "0x81",
+          "0x82",
+          "0x83",
+          "0x84",
+          "0x85",
+          "0x86",
+          "0x87",
+          "0x88",
+          "0x89",
+          "0x8a",
+          "0x8b",
+          "0x8c",
+          "0x8d",
+          "0x8f",
+          "0x90",
+          "0x91",
+          "0x92",
+          "0x93",
+          "0x94",
+          "0x95",
+          "0x96",
+          "0x97",
+          "0x98",
+          "0x99",
+          "0xa3",
+          "0xa4",
+          "0xf3",
+          "0xfa",
+          "0xfd"
+        ]
+      },
+      "deploymentGasUsed": "634299",
+      "gasUsed": {
+        "1": "151369",
+        "2": "108095",
+        "10": "108095",
+        "100": "108083"
+      },
+      "queryGasEstimates": {
+        "getProof": "26282",
+        "getWork": "26161",
+        "getVersion": "31030"
+      },
+      "read20CallsMs": 7.368900000001304,
+      "indexedWorkScanMs": 0.6671000000005733,
+      "runtimeCodeHash": "0xcf4f04af2b6d63e7006cf0a7e815a61df9f8135965c271c51f648ad46ba9ce2a",
+      "original": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "registry": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    },
+    {
+      "variant": "paris-1",
+      "hardfork": "merge",
+      "analysis": {
+        "creationBytes": 2999,
+        "runtimeBytes": 2529,
+        "runtimeCodeBytes": 2443,
+        "embeddedRuntimeOffset": 470,
+        "constructorPush0": 0,
+        "runtimePush0": 0,
+        "runtimeOpcodeSet": [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x19",
+          "0x1b",
+          "0x1c",
+          "0x20",
+          "0x33",
+          "0x34",
+          "0x35",
+          "0x36",
+          "0x39",
+          "0x3d",
+          "0x42",
+          "0x50",
+          "0x51",
+          "0x52",
+          "0x54",
+          "0x55",
+          "0x56",
+          "0x57",
+          "0x5a",
+          "0x5b",
+          "0x60",
+          "0x61",
+          "0x62",
+          "0x63",
+          "0x7f",
+          "0x80",
+          "0x81",
+          "0x82",
+          "0x83",
+          "0x84",
+          "0x85",
+          "0x86",
+          "0x87",
+          "0x88",
+          "0x89",
+          "0x8a",
+          "0x8b",
+          "0x8c",
+          "0x8d",
+          "0x8f",
+          "0x90",
+          "0x91",
+          "0x92",
+          "0x93",
+          "0x94",
+          "0x95",
+          "0x96",
+          "0x97",
+          "0x98",
+          "0x99",
+          "0xa3",
+          "0xa4",
+          "0xf3",
+          "0xfa",
+          "0xfd"
+        ]
+      },
+      "deploymentGasUsed": "636333",
+      "gasUsed": {
+        "1": "151468",
+        "2": "108232",
+        "10": "108232",
+        "100": "108220"
+      },
+      "queryGasEstimates": {
+        "getProof": "26285",
+        "getWork": "26141",
+        "getVersion": "31012"
+      },
+      "read20CallsMs": 7.540500000000975,
+      "indexedWorkScanMs": 0.610899999999674,
+      "runtimeCodeHash": "0x2468f25403663522c278e8ffb1dc291d18a040950f584ba1466e64c714e7a2ac",
+      "original": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "registry": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    },
+    {
+      "variant": "shanghai-1",
+      "hardfork": "shanghai",
+      "analysis": {
+        "creationBytes": 2947,
+        "runtimeBytes": 2491,
+        "runtimeCodeBytes": 2405,
+        "embeddedRuntimeOffset": 456,
+        "constructorPush0": 14,
+        "runtimePush0": 38,
+        "runtimeOpcodeSet": [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x19",
+          "0x1b",
+          "0x1c",
+          "0x20",
+          "0x33",
+          "0x34",
+          "0x35",
+          "0x36",
+          "0x39",
+          "0x3d",
+          "0x42",
+          "0x50",
+          "0x51",
+          "0x52",
+          "0x54",
+          "0x55",
+          "0x56",
+          "0x57",
+          "0x5a",
+          "0x5b",
+          "0x5f",
+          "0x60",
+          "0x61",
+          "0x62",
+          "0x63",
+          "0x7f",
+          "0x80",
+          "0x81",
+          "0x82",
+          "0x83",
+          "0x84",
+          "0x85",
+          "0x86",
+          "0x87",
+          "0x88",
+          "0x89",
+          "0x8a",
+          "0x8b",
+          "0x8c",
+          "0x8d",
+          "0x8f",
+          "0x90",
+          "0x91",
+          "0x92",
+          "0x93",
+          "0x94",
+          "0x95",
+          "0x96",
+          "0x97",
+          "0x98",
+          "0x99",
+          "0xa3",
+          "0xa4",
+          "0xf3",
+          "0xfa",
+          "0xfd"
+        ]
+      },
+      "deploymentGasUsed": "628688",
+      "gasUsed": {
+        "1": "151453",
+        "2": "108217",
+        "10": "108217",
+        "100": "108205"
+      },
+      "queryGasEstimates": {
+        "getProof": "26282",
+        "getWork": "26138",
+        "getVersion": "31007"
+      },
+      "read20CallsMs": 10.415799999998853,
+      "indexedWorkScanMs": 0.7520000000004075,
+      "runtimeCodeHash": "0xb685a20e41054414fdcc303f1237d9dd373e8766f6b79fd7baffa4de901ec74d",
+      "original": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "registry": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    },
+    {
+      "variant": "paris-unoptimized",
+      "hardfork": "merge",
+      "analysis": {
+        "creationBytes": 6401,
+        "runtimeBytes": 5426,
+        "runtimeCodeBytes": 5372,
+        "embeddedRuntimeOffset": 975,
+        "constructorPush0": 0,
+        "runtimePush0": 0,
+        "runtimeOpcodeSet": [
+          "0x00",
+          "0x01",
+          "0x02",
+          "0x03",
+          "0x04",
+          "0x0a",
+          "0x10",
+          "0x11",
+          "0x12",
+          "0x14",
+          "0x15",
+          "0x16",
+          "0x17",
+          "0x19",
+          "0x1b",
+          "0x1c",
+          "0x20",
+          "0x33",
+          "0x34",
+          "0x35",
+          "0x36",
+          "0x3d",
+          "0x42",
+          "0x50",
+          "0x51",
+          "0x52",
+          "0x54",
+          "0x55",
+          "0x56",
+          "0x57",
+          "0x5a",
+          "0x5b",
+          "0x60",
+          "0x61",
+          "0x62",
+          "0x63",
+          "0x67",
+          "0x73",
+          "0x7f",
+          "0x80",
+          "0x81",
+          "0x82",
+          "0x83",
+          "0x84",
+          "0x85",
+          "0x86",
+          "0x87",
+          "0x88",
+          "0x90",
+          "0x91",
+          "0x92",
+          "0x93",
+          "0x94",
+          "0xa3",
+          "0xa4",
+          "0xf3",
+          "0xfa",
+          "0xfd"
+        ]
+      },
+      "deploymentGasUsed": "1264580",
+      "gasUsed": {
+        "1": "154885",
+        "2": "111272",
+        "10": "111272",
+        "100": "111260"
+      },
+      "queryGasEstimates": {
+        "getProof": "26909",
+        "getWork": "27002",
+        "getVersion": "32253"
+      },
+      "read20CallsMs": 7.597099999999045,
+      "indexedWorkScanMs": 0.7259999999987485,
+      "runtimeCodeHash": "0xbcaf73a6127eb5b96bd58a883f8d1b4589fa23d16858bbd033d7112c9112fbb7",
+      "original": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+      "registry": "0xe7f1725e7734ce288f8367e1bb143e90bb3f0512"
+    }
+  ],
+  "protection": {
+    "recordedAt": "2026-10-13T11:38:16.623Z",
+    "protectedSourceUnchanged": true,
+    "hashes": {
+      "contracts/ChainProof.sol": "4addd87e771a943fcc01f44c142c36b03536427a9c69fa2caad11747bfce066c",
+      "contracts/ChainProofVersionRegistry.sol": "586d83a2e6713c2a19d5977e6a514fe2da8a4aaa8e6da0b81f9966e5f7de877e",
+      "lib/version-registry-abi.ts": "40144d13336e64417386b23299903d53329d0c97dc1b035819d2ca5beadb0af9",
+      "lib/chainproof.ts": "e4781bb447541e2842fa9776a58ace05de255701b1375224413fd493815e3b90",
+      "lib/proof-history.ts": "e768d3dcde1c6a870d29a1470a03c5c47a5bed71edad1f94b34afd7dd7ebbf8c",
+      "tools/local-evm/compile.mjs": "e8d824b954bbe1c62afef6ddfec860a18b25acc25a721cc06ea82e8497cdfc2a",
+      "tools/local-evm/backup.mjs": "f1a8827247f476527fe33538a91f37c3bde796b23b8682075a1a21af589bbc97",
+      "tools/local-evm/recovery.mjs": "88fd6a7cc96a5b93a01814a82fd716791ff85d6dfb0c148add78683a80454b31",
+      ".metamask-local/active.json": "2e5db176173876ad5b7deda9ed156f23df8a83f027f8a32f69f0f1d0f1e40dee"
+    },
+    "backups": {
+      ".local-evm/backups/chain31338-2026-10-13T07-36-17-756Z-496b7473.json": "e6dc9107f5c0d740b1bd71c4e5d877a4fc446fe912196afacab07bb3e4e26c60",
+      ".local-evm/backups/chain31337-2026-10-13T01-29-12-455Z-e0988bf6.json": "42f570726d0077e00d62634b40154670560860e6fdd4bf66069f17cd1033bc8b"
+    },
+    "openingLiveRead": {
+      "head": {
+        "number": "20",
+        "hash": "0x78c7dc04e340127b8b6aa235e5c81b9b076c51b09da1ab8a8dadf7bd7e9704b1"
+      },
+      "works": 6,
+      "versions": 9,
+      "matchesBackup": true
+    },
+    "finalLive": {
+      "available": false,
+      "error": "ECONNREFUSED 127.0.0.1:18547",
+      "meaning": "Observed during final checks. Did not stop/restart/reset user node; current in-memory state unknown."
+    },
+    "archived31338": {
+      "head": {
+        "number": "20",
+        "hash": "0x78c7dc04e340127b8b6aa235e5c81b9b076c51b09da1ab8a8dadf7bd7e9704b1"
+      },
+      "works": 6,
+      "versions": 9,
+      "proofs": 7,
+      "transactions": 20,
+      "work6": 2
+    },
+    "archived31337": {
+      "works": 6,
+      "versions": 16,
+      "work4": "3"
+    }
+  },
+  "artifacts": {
+    "mainnet": {
+      "file": ".local-evm/compatibility/2026-10-13T09-12-42-217Z-401afe4c/mainnet-readonly.json",
+      "sha256": "f0a4c39c287dc8adb0ded8b3d1fb756f9fce5a0e01d71811107cd7fb8bbbcdbd"
+    },
+    "testnet": {
+      "file": ".local-evm/compatibility/2026-10-13T09-09-47-223Z-af3c0664/testnet-readonly.json",
+      "sha256": "2a9c3ab87f94f5e118452a534f69ea42fc0fb65c4b4ece8b7ba5d92a348a4c51"
+    },
+    "localResults": {
+      "file": ".local-evm/compatibility/2026-10-13T11-28-22-706Z-8ded55f7/local-results.json",
+      "sha256": "bbabecf82239b7315ec3be1171c58d921aa1ac2a944e4d0326462f7548bdcf14"
+    },
+    "openingProtection": {
+      "file": ".local-evm/compatibility/protection-1791879559583.json",
+      "sha256": "8e338a8816bb478545416f19c372eaa5435b70eea250782bda5b97d117408eb0"
+    },
+    "finalProtection": {
+      "file": ".local-evm/compatibility/protection-final-1791891496641.json",
+      "sha256": "113aa8b35f269edaf28b10d0a506da7869133ed001b4d4d539914a70ce84ca7f"
+    },
+    "explorer": {
+      "file": ".local-evm/compatibility/web-evidence-20261013/ba19b6a8-e5c5-407a-bbeb-60c17607ab25.json",
+      "sha256": "7b1fb0ea3974ab4f81a74f3157f31976c0626dba5de816d0ad83f4e63f3ddfec"
+    },
+    "testnetCrosscheck": {
+      "file": ".local-evm/compatibility/web-evidence-20261013/testnet-request-3955d2ab-7833-412e-a0c2-0d87c820b143.json.response.json",
+      "sha256": "7be7d09d061685e6aef1b1c4b4727e536813848fbe709d47747b193a41a92a6e"
+    },
+    "ownerQuery": {
+      "file": ".local-evm/compatibility/web-evidence-20261013/owner-query-6a749d5e-3277-4e56-8a46-f9b2f262ad9b.json.response.json",
+      "sha256": "3dc9b01ddc74f46fa5843dea7f4ddf5be973f23e930e6fcd893b3f989ebef125"
+    }
+  },
+  "tests": {
+    "npmTest": 72,
+    "wallet": 48,
+    "contracts": 27,
+    "compatibility": 10,
+    "lint": "passed (tsc --noEmit)",
+    "build": "passed",
+    "productionGates": "Both passed in Edge on isolated127.0.0.1:3009; owned preview stopped",
+    "note": "Suites overlap; not unique coverage"
+  },
+  "uncertainties": [
+    "Full chain677 fork activation schedule",
+    "Verified old source/compiler settings",
+    "Dense log/rate policy",
+    "Official confirmation count/public V2 reorg policy",
+    "Real testnet deployment/faucet delivery",
+    "No independent audit",
+    "Final31338 endpoint unavailable; current in-memory state not observed"
+  ]
+}

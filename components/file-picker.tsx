@@ -1,20 +1,22 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fingerprintFile, formatFileSize, type FileFingerprint } from "@/lib/proof";
 
 type Props = {
   onChange: (fingerprint: FileFingerprint | null) => void;
   disabled?: boolean;
+  onStatusChange?: (status: "idle" | "hashing" | "ready" | "error") => void;
 };
 
-export default function FilePicker({ onChange, disabled = false }: Props) {
+export default function FilePicker({ onChange, disabled = false, onStatusChange }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
   const requestRef = useRef(0);
   const [fingerprint, setFingerprint] = useState<FileFingerprint | null>(null);
   const [busy, setBusy] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [error, setError] = useState("");
+  useEffect(() => () => { requestRef.current += 1; }, []);
 
   async function processFile(file?: File) {
     if (!file || disabled) return;
@@ -23,13 +25,15 @@ export default function FilePicker({ onChange, disabled = false }: Props) {
     onChange(null);
     setError("");
     setBusy(true);
+    onStatusChange?.("hashing");
     try {
       const result = await fingerprintFile(file);
       if (request !== requestRef.current) return;
       setFingerprint(result);
       onChange(result);
+      onStatusChange?.("ready");
     } catch {
-      if (request === requestRef.current) setError("Could not read this file. Please choose another one.");
+      if (request === requestRef.current) { setError("Could not read this file. Please choose another one."); onStatusChange?.("error"); }
     } finally {
       if (request === requestRef.current) setBusy(false);
     }
@@ -65,7 +69,7 @@ export default function FilePicker({ onChange, disabled = false }: Props) {
       </label>
 
       <div aria-live="polite">
-        {busy && <p className="mt-5 text-sm text-zinc-400">Calculating SHA-256 fingerprint…</p>}
+        {busy && <p className="mt-5 text-sm text-zinc-400">Calculating SHA-256 fingerprint… Large files may take longer and use more browser memory.</p>}
         {error && <p className="mt-5 text-sm text-red-300">{error}</p>}
         {fingerprint && (
           <div className="mt-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
@@ -77,6 +81,7 @@ export default function FilePicker({ onChange, disabled = false }: Props) {
           </div>
         )}
       </div>
+      {(fingerprint || error) && !disabled && <button type="button" onClick={() => { requestRef.current += 1; setFingerprint(null); setError(""); setBusy(false); onChange(null); onStatusChange?.("idle"); }} className="mt-4 text-xs text-zinc-400 underline underline-offset-4 hover:text-white">Clear selected file</button>}
     </div>
   );
 }

@@ -1,0 +1,3 @@
+# Hardhat's compiler/config tooling uses esbuild. No other dependency scripts are enabled here.
+allowBuilds:
+  esbuild: true

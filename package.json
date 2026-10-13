@@ -2,14 +2,39 @@
   "name": "chainproof",
   "version": "0.1.0",
   "private": true,
+  "engines": { "node": "24.x" },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "compile:chain:local": "node tools/local-evm/compile.mjs",
+    "dev:chain:local": "node tools/local-evm/node.mjs",
+    "setup:chain:local": "node tools/local-evm/setup.mjs",
+    "test:contracts:local": "node --test tools/local-evm/*.test.mjs",
+    "dev:version:local": "node tools/local-evm/start.mjs",
+    "dev:version": "node tools/local-evm/start.mjs",
+    "backup:chain:local": "node tools/local-evm/backup.mjs",
+    "verify:backup:local": "node tools/local-evm/recovery.mjs",
+    "restore:chain:isolated": "node tools/local-evm/recovery.mjs",
+    "resume:version:local": "node tools/local-evm/resume.mjs",
+    "test:recovery:local": "node --test tools/local-evm/recovery.test.mjs",
+    "dev:metamask:local": "node tools/metamask-local/start.mjs",
+    "fund:metamask:local": "node tools/metamask-local/fund.mjs",
+    "test:wallet:local": "node --test tests/metamask-*.test.mjs tools/metamask-local/*.test.mjs",
+    "backup:metamask:local": "node tools/metamask-local/archive.mjs",
+    "verify:backup:metamask": "node tools/metamask-local/recover.mjs",
+    "restore:metamask:isolated": "node tools/metamask-local/recover.mjs",
+    "resume:metamask:local": "node tools/metamask-local/resume.mjs",
+    "test:recovery:metamask": "node --test tools/metamask-local/archive.test.mjs",
+    "compile:compatibility:local": "node tools/botchain-review/compile.mjs",
+    "test:compatibility:local": "node --test tools/botchain-review/compatibility.test.mjs",
+    "check:botchain:readonly": "node tools/botchain-review/readonly.mjs"
   },
   "dependencies": {
     "next": "^16.0.0",
+    "qrcode": "^1.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "viem": "^2.57.3"
@@ -17,8 +42,12 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "hardhat": "3.19.0",
+    "jsqr": "^1.4.0",
+    "solc": "0.8.20",
     "tailwindcss": "^4.0.0",
     "typescript": "^5.0.0"
   }

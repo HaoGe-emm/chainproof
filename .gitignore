@@ -2,6 +2,13 @@
 /.next/
 /out/
 /.pnpm-store/
+/.local-evm/
+/.next-local-evm/
+/.metamask-local/
+/.next-metamask-local/
+/.presentation-build/
+/.vercel/
+/docs/local-evm-recovery-baseline.json
 
 # Local configuration and logs
 .env

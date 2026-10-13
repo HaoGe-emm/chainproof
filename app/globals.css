@@ -25,3 +25,52 @@ button, a, input {
   background: #d6e3f0;
   color: #090b0f;
 }
+
+.certificate-details dt {
+  color: #a1a1aa;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.certificate-value {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  user-select: all;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0s !important; animation-duration: 0s !important; }
+}
+
+@page {
+  size: A4;
+  margin: 14mm;
+}
+
+@media print {
+  :root { color-scheme: light; }
+  html, body { min-height: 0; background: white !important; color: #18181b; color-scheme: light; }
+  .app-shell > header, .app-shell > footer, .certificate-interactive, nextjs-portal { display: none !important; }
+  .app-shell { max-width: none; min-height: 0; padding: 0; }
+  .certificate-page { max-width: none; padding: 0; }
+  .certificate-sheet { margin: 0; padding: 0; border: 0; border-radius: 0; background: white; overflow: visible; }
+  .certificate-sheet p, .certificate-sheet dd { color: #18181b !important; }
+  .certificate-heading { padding-bottom: 16px; border-color: #d4d4d8; }
+  .certificate-heading h1 { margin-top: 12px; font-size: 26px; color: #18181b; }
+  .certificate-status { color: #065f46 !important; background: #ecfdf5 !important; border-color: #a7f3d0; }
+  .certificate-details { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px; font-size: 12px; }
+  .certificate-details > div:nth-child(1), .certificate-details > div:nth-child(2), .certificate-details > div:nth-child(7) { grid-column: 1 / -1; }
+  .certificate-details dd { margin-top: 4px; line-height: 1.5; }
+  .certificate-value { padding: 0; border: 0; border-radius: 0; background: transparent; }
+  .certificate-public-link { display: block; margin-top: 6px; color: #18181b; font-size: 11px; line-height: 1.5; text-decoration: none; }
+  .certificate-record-explanation { font-size: 11px; line-height: 1.5; margin-top: 8px; }
+  .certificate-local-notice { font-size: 10px; line-height: 1.5; }
+  .certificate-details dt { color: #52525b; font-size: 10px; }
+  .certificate-share { flex-direction: row; align-items: center; margin-top: 20px; padding-top: 16px; border-color: #d4d4d8; break-inside: avoid; }
+  .certificate-qr { width: 128px; height: 128px; border-radius: 0; }
+  .certificate-notice { margin-top: 18px; padding-top: 14px; border-color: #d4d4d8; font-size: 10px; line-height: 1.5; break-inside: avoid; }
+}

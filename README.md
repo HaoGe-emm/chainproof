@@ -74,19 +74,21 @@ MetaMask may show a different network or currency label for Chain ID `968`. This
 
 ## Running Locally
 
-Install dependencies and start the development server:
+Use **Node.js 24.x**. This repository uses `pnpm-lock.yaml`; install with its frozen lockfile for reproducible development/release builds, then use the existing npm scripts:
 
 ```bash
-npm install
+pnpm install --frozen-lockfile
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000). Run `npm run build` to check the production build. Creating a proof requires MetaMask and mainnet BOT for gas; verification does not require a wallet.
 
+The current release scope is single-file proofs, verification, My Proofs and public certificates. Version History is not deployed to BOT Chain Mainnet. All prototype/local EVM interfaces are disabled in production and Preview builds regardless of environment flags; ordinary development also defaults to disabled. To inspect only the browser prototype without starting or restoring any EVM, explicitly set `CHAINPROOF_VERSION_PROTOTYPE=1` when running `npm run dev`. Existing local EVM tools and backups are retained separately; do not run setup/reset scripts as part of a release.
+
 ## Demo Flow
 
 1. Connect MetaMask.
-2. Upload a file through the browser picker; it is processed locally.
+2. Select a file through the browser picker; it is processed locally.
 3. Click **Create Proof**.
 4. Confirm the transaction in MetaMask.
 5. Verify the same file on the **Verify Provenance** page.

@@ -1,0 +1,150 @@
+// Browser-local associations use demo fixtures. Only the first compatibility
+// check reads a real mainnet proof. No signer or wallet write path is available.
+import assert from "node:assert/strict";
+import { createRequire } from "node:module";
+import { mkdir } from "node:fs/promises";
+import { encodeFunctionResult, parseAbi } from "viem";
+import { DEMO_PROOFS, DEMO_WALLETS, MAINNET_COMPATIBILITY_HASH, VERSION_DEMO_KEY } from "../lib/version-history.ts";
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.PLAYWRIGHT_MODULE || "playwright");
+const base = process.env.CHAINPROOF_TEST_URL || "http://localhost:3001";
+const browser = await chromium.launch({ headless: true, channel: process.env.CHAINPROOF_BROWSER_CHANNEL || undefined });
+const context = await browser.newContext({ viewport: { width: 1280, height: 900 }, permissions: ["clipboard-read", "clipboard-write"] });
+const page = await context.newPage();
+const errors = [];
+page.on("pageerror", (error) => errors.push(error.message));
+const methods = [];
+await context.route("https://rpc.botchain.ai/**", async (route) => {
+  const item = route.request().postDataJSON();
+  assert.ok(["eth_chainId", "eth_call"].includes(item.method), `No non-read method allowed: ${item.method}`);
+  methods.push(item.method);
+  await route.continue();
+});
+await mkdir(".next/version-qa", { recursive: true });
+try {
+  await page.goto(`${base}/works`);
+  await page.getByText("No local demo works yet. Create one to try the timeline.", { exact: true }).waitFor();
+  assert.equal(await page.evaluate(() => Boolean(window.ethereum)), false);
+  assert.equal(await page.getByRole("navigation", { name: "Main navigation" }).getByRole("link").count(), 4, "Existing navigation unchanged");
+  await page.getByRole("button", { name: "Read mainnet proof", exact: true }).click();
+  await page.getByText("Single-file registration confirmed · BOT Chain Mainnet", { exact: true }).waitFor({ timeout: 45000 });
+  const real = await page.getByTestId("real-proof-result").innerText();
+  assert.ok(real.toLowerCase().includes("0x89f415bb42e356e8b892c10b05522e0a8ef151f3"));
+  assert.ok(real.includes("2026-10-08 02:24:03 UTC"));
+  assert.ok(real.includes(MAINNET_COMPATIBILITY_HASH));
+  const cert = page.getByRole("link", { name: "View existing public certificate", exact: true });
+  assert.equal(await cert.getAttribute("href"), `/proof/${MAINNET_COMPATIBILITY_HASH}`);
+  await cert.click();
+  await page.getByText("REGISTERED ON BOT CHAIN MAINNET", { exact: true }).waitFor({ timeout: 45000 });
+  console.log("PASS: real read-only mainnet compatibility, original owner/time and unchanged public certificate");
+
+  await page.goto(`${base}/works/new`);
+  await page.getByLabel("Title · User-provided", { exact: true }).fill("Novel demo history");
+  await page.getByLabel("Description · Local only", { exact: true }).fill("Local labels, not a chain-certified work.");
+  await page.getByRole("button", { name: "Create local demo", exact: true }).click();
+  await page.waitForURL(/\/works\/demo-[0-9a-f-]+$/);
+  const workUrl = page.url();
+  await page.getByRole("button", { name: "Append demo version", exact: true }).click();
+  await page.getByRole("heading", { name: "Version 1", exact: true }).waitFor();
+  await page.getByLabel("Demo proof fixture", { exact: true }).selectOption(DEMO_PROOFS[1].fileHash);
+  await page.getByLabel("Version label · User-provided (optional)", { exact: true }).fill("Final / unverified label");
+  await page.getByRole("button", { name: "Append demo version", exact: true }).click();
+  await page.getByRole("heading", { name: "Version 2", exact: true }).waitFor();
+  assert.equal(await page.getByTestId("demo-version").count(), 2);
+  assert.equal(await page.getByTestId("demo-version").getByRole("link", { name: /certificate/i }).count(), 0, "Demo proof cannot become a mainnet certificate link");
+  await page.getByRole("button", { name: "Append demo version", exact: true }).click();
+  await page.getByRole("alert").filter({ hasText: "already linked" }).waitFor();
+  await page.getByLabel("Demo proof fixture", { exact: true }).selectOption(DEMO_PROOFS[3].fileHash);
+  await page.getByRole("button", { name: "Append demo version", exact: true }).click();
+  await page.getByRole("alert").filter({ hasText: "original registered wallet" }).waitFor();
+  await page.getByLabel("Simulated acting wallet", { exact: true }).selectOption(DEMO_WALLETS[1]);
+  await page.getByRole("button", { name: "Append demo version", exact: true }).click();
+  await page.getByRole("alert").filter({ hasText: "only the work controller" }).waitFor();
+  assert.equal(await page.getByTestId("demo-version").count(), 2);
+  await page.getByRole("button", { name: "Copy Hash", exact: true }).first().click();
+  assert.equal(await page.evaluate(() => navigator.clipboard.readText()), DEMO_PROOFS[0].fileHash);
+  await page.getByText("View Proof (demo)", { exact: true }).first().click();
+  await page.getByText("Synthetic fixture only. This is not a mainnet certificate.", { exact: true }).first().waitFor();
+  await page.locator("#file-input").setInputFiles({ name: "draft.txt", mimeType: "text/plain", buffer: Buffer.from(DEMO_PROOFS[0].content) });
+  await page.getByText("Demo byte match · Version 1. No on-chain relationship has been verified.", { exact: true }).waitFor();
+  assert.equal(await page.getByText("MATCH", { exact: true }).count(), 0);
+  await page.getByRole("link", { name: "Verify File", exact: true }).nth(1).click();
+  await page.locator("#file-input").setInputFiles({ name: "draft.txt", mimeType: "text/plain", buffer: Buffer.from(DEMO_PROOFS[0].content) });
+  await page.getByText("No demo byte match. This result does not determine mainnet registration.", { exact: true }).waitFor();
+  await page.getByRole("button", { name: "Compare all demo versions", exact: true }).click();
+  await page.locator("#file-input").setInputFiles({ name: "edited.txt", mimeType: "text/plain", buffer: Buffer.from(DEMO_PROOFS[0].content.replace("draft 1", "draft 9")) });
+  await page.getByText("No demo byte match. This result does not determine mainnet registration.", { exact: true }).waitFor();
+  const raw = await page.evaluate((key) => localStorage.getItem(key), VERSION_DEMO_KEY);
+  assert.ok(!raw.includes("content") && !raw.includes("draft.txt") && !raw.includes("edited.txt"));
+  assert.equal(JSON.parse(raw).works[0].source, "demo");
+  await page.reload();
+  await page.getByRole("heading", { name: "Version 2", exact: true }).waitFor();
+  assert.equal(await page.getByTestId("demo-version").count(), 2);
+  const secondContext = await browser.newContext();
+  const second = await secondContext.newPage();
+  await second.goto(workUrl);
+  await second.getByRole("heading", { name: "Local demo unavailable", exact: true }).waitFor();
+  await secondContext.close();
+  console.log("PASS: local creation, sequence, duplicate/foreign-wallet rejection, copy, demo byte comparison, reload and no cross-device sharing claim");
+
+  // After the live check, absent/error/race checks use explicit RPC test fixtures.
+  const abi = parseAbi(["function getProof(bytes32 fileHash) view returns (address owner, uint256 timestamp, bool exists)"]);
+  let mode = "absent";
+  let release;
+  let hold;
+  await context.unroute("https://rpc.botchain.ai/**");
+  await context.route("https://rpc.botchain.ai/**", async (route) => {
+    const item = route.request().postDataJSON();
+    assert.ok(["eth_chainId", "eth_call"].includes(item.method));
+    if (hold) await hold;
+    const result = item.method === "eth_chainId" ? "0x2a5" : encodeFunctionResult({ abi, functionName: "getProof", result: [DEMO_WALLETS[0], BigInt(0), false] });
+    await route.fulfill({ contentType: "application/json", body: JSON.stringify(mode === "error" ? { jsonrpc: "2.0", id: item.id, error: { code: -32000, message: "Fixture read failure" } } : { jsonrpc: "2.0", id: item.id, result }) });
+  });
+  await page.getByRole("button", { name: "Read mainnet proof", exact: true }).click();
+  await page.getByText("No single-file registration found. No relationship was created.", { exact: true }).waitFor();
+  mode = "error";
+  await page.getByRole("button", { name: "Read mainnet proof", exact: true }).click();
+  await page.getByRole("alert").filter({ hasText: "Registration status is unknown" }).waitFor({ timeout: 20000 });
+  assert.equal(await page.getByRole("link", { name: "View existing public certificate", exact: true }).count(), 0);
+  mode = "absent";
+  hold = new Promise((resolve) => { release = resolve; });
+  await page.getByRole("button", { name: "Retry read-only check", exact: true }).click();
+  await page.getByRole("button", { name: "Reading original registry…", exact: true }).waitFor();
+  await page.getByLabel("Existing file fingerprint", { exact: true }).fill("0x123");
+  release(); hold = null;
+  await page.waitForTimeout(100);
+  assert.equal(await page.getByText("No single-file registration found. No relationship was created.", { exact: true }).count(), 0, "Stale lookup must not republish after input changes");
+  await page.getByRole("button", { name: "Read mainnet proof", exact: true }).click();
+  await page.getByText("Enter 0x followed by 64 hexadecimal characters.", { exact: true }).waitFor();
+  for (const width of [320, 375, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const path of ["/works", "/works/new", workUrl.replace(base, "")]) {
+      await page.goto(`${base}${path}`);
+      await page.getByRole("navigation", { name: "Prototype navigation" }).waitFor();
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `No overflow: ${width}px ${path}`);
+    }
+  }
+  await page.screenshot({ path: ".next/version-qa/desktop.png", fullPage: true });
+  await page.setViewportSize({ width: 375, height: 850 });
+  await page.screenshot({ path: ".next/version-qa/mobile.png", fullPage: true });
+  console.log("PASS: absent/failed/invalid/stale lookup states and 320/375/768/1440px prototype routes");
+
+  await page.evaluate((key) => localStorage.setItem(key, "corrupt prototype data"), VERSION_DEMO_KEY);
+  await page.reload();
+  await page.getByRole("button", { name: "Continue in memory", exact: true }).click();
+  assert.equal(await page.evaluate((key) => localStorage.getItem(key), VERSION_DEMO_KEY), "corrupt prototype data", "Corrupt saved data must not be overwritten");
+  const blocked = await browser.newContext();
+  await blocked.addInitScript(() => Object.defineProperty(window, "localStorage", { get() { throw new Error("Fixture storage blocked"); } }));
+  const blockedPage = await blocked.newPage();
+  await blockedPage.goto(`${base}/works/new`);
+  await blockedPage.getByRole("alert").filter({ hasText: "Browser storage is unavailable" }).waitFor();
+  await blockedPage.getByLabel("Title · User-provided", { exact: true }).fill("Memory demo");
+  await blockedPage.getByRole("button", { name: "Create local demo", exact: true }).click();
+  await blockedPage.getByRole("heading", { name: "Memory demo", exact: true }).waitFor();
+  await blockedPage.reload();
+  await blockedPage.getByRole("heading", { name: "Local demo unavailable", exact: true }).waitFor();
+  await blocked.close();
+  assert.deepEqual(errors, []);
+  assert.ok(methods.every((method) => ["eth_call", "eth_chainId"].includes(method)));
+  console.log("PASS: corrupt and disabled storage remain explicit and do not alter saved user data");
+} finally { await context.close(); await browser.close(); }
